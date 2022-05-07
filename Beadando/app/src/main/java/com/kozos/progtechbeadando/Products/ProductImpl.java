@@ -1,10 +1,12 @@
 package com.kozos.progtechbeadando.Products;
 
-import com.kozos.progtechbeadando.Products.Exceptions.IdCannotBeEmptyException;
-import com.kozos.progtechbeadando.Products.Exceptions.NameCannotBeEmptyException;
-import com.kozos.progtechbeadando.Products.Exceptions.NameTooLongException;
-import com.kozos.progtechbeadando.Products.Exceptions.NameTooShortException;
-import com.kozos.progtechbeadando.Products.Exceptions.PriceIsTooLowException;
+import com.kozos.progtechbeadando.Products.Exceptions.ProductIdCannotBeEmptyException;
+import com.kozos.progtechbeadando.Products.Exceptions.ProductNameCannotBeEmptyException;
+import com.kozos.progtechbeadando.Products.Exceptions.ProductNameTooLongException;
+import com.kozos.progtechbeadando.Products.Exceptions.ProductNameTooShortException;
+import com.kozos.progtechbeadando.Products.Exceptions.ProductPriceIsTooLowException;
+import com.kozos.progtechbeadando.Products.Exceptions.ProductDesiredQuantityIsTooHighException;
+import com.kozos.progtechbeadando.Products.Exceptions.ProductDesiredQuantityIsTooLowException;
 import com.kozos.progtechbeadando.Warranty.Warranty;
 
 public abstract class ProductImpl implements Product{
@@ -28,9 +30,9 @@ public abstract class ProductImpl implements Product{
         return this.id;
     }
 
-    void setId(String id) throws IdCannotBeEmptyException {
+    void setId(String id) throws ProductIdCannotBeEmptyException {
         if(id == null || id == " ")
-            throw new IdCannotBeEmptyException();
+            throw new ProductIdCannotBeEmptyException();
         this.id = id;
     }
 
@@ -40,13 +42,13 @@ public abstract class ProductImpl implements Product{
     }
 
     @Override
-    public void setName(String name) throws NameCannotBeEmptyException, NameTooShortException, NameTooLongException {
-        if(name == null ||name == " ")
-            throw new NameCannotBeEmptyException();
+    public void setName(String name) throws ProductNameCannotBeEmptyException, ProductNameTooShortException, ProductNameTooLongException {
+        if(name == null || name.equals(" "))
+            throw new ProductNameCannotBeEmptyException();
         if(name.length() < 3)
-            throw new NameTooShortException();
+            throw new ProductNameTooShortException();
         if(name.length() > 50)
-            throw new NameTooLongException();
+            throw new ProductNameTooLongException();
         this.name = name;
     }
 
@@ -56,9 +58,9 @@ public abstract class ProductImpl implements Product{
     }
 
     @Override
-    public void setPrice(int price) throws PriceIsTooLowException {
+    public void setPrice(int price) throws ProductPriceIsTooLowException {
         if(price < 0)
-            throw new PriceIsTooLowException();
+            throw new ProductPriceIsTooLowException();
         this.price = price;
     }
 
@@ -68,7 +70,11 @@ public abstract class ProductImpl implements Product{
     }
 
     @Override
-    public void changeQuantity(int quantity) {
+    public void changeQuantity(int quantity) throws ProductDesiredQuantityIsTooLowException, ProductDesiredQuantityIsTooHighException {
+        if(quantity < 0)
+            throw new ProductDesiredQuantityIsTooLowException();
+        if(quantity > 300000)
+            throw new ProductDesiredQuantityIsTooHighException();
         this.quantity = quantity;
     }
 
