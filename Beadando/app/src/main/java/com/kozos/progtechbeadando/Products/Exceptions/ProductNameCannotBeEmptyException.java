@@ -1,4 +1,4 @@
 package com.kozos.progtechbeadando.Products.Exceptions;
 
-public class ProductNameCannotBeEmptyException extends Throwable {
+public class ProductNameCannotBeEmptyException extends RuntimeException {
 }

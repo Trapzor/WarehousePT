@@ -1,4 +1,4 @@
 package com.kozos.progtechbeadando.Customers.Exceptions;
 
-public class CustomerAddressCannotBeEmptyException extends Throwable {
+public class CustomerAddressCannotBeEmptyException extends RuntimeException {
 }

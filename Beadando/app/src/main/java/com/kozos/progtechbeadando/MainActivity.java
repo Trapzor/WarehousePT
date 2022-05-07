@@ -1,17 +1,8 @@
 package com.kozos.progtechbeadando;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-import com.kozos.progtechbeadando.Products.Electronics;
-import com.kozos.progtechbeadando.Products.Product;
-import com.kozos.progtechbeadando.Products.ProductImpl;
-import com.kozos.progtechbeadando.Products.Toys;
-import com.kozos.progtechbeadando.Warranty.LifetimeWarranty;
-import com.kozos.progtechbeadando.Warranty.NoWarranty;
-
-import java.util.Date;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 

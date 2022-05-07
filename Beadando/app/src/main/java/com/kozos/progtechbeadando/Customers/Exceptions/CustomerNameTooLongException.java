@@ -1,4 +1,4 @@
 package com.kozos.progtechbeadando.Customers.Exceptions;
 
-public class CustomerNameTooLongException extends Throwable {
+public class CustomerNameTooLongException extends RuntimeException {
 }

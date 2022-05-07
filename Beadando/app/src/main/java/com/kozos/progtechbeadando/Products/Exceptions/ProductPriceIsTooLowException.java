@@ -1,4 +1,4 @@
 package com.kozos.progtechbeadando.Products.Exceptions;
 
-public class ProductPriceIsTooLowException extends Throwable {
+public class ProductPriceIsTooLowException extends RuntimeException {
 }

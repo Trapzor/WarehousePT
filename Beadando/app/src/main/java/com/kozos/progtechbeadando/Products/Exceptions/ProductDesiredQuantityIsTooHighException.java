@@ -1,4 +1,4 @@
 package com.kozos.progtechbeadando.Products.Exceptions;
 
-public class ProductDesiredQuantityIsTooHighException extends Throwable {
+public class ProductDesiredQuantityIsTooHighException extends RuntimeException {
 }

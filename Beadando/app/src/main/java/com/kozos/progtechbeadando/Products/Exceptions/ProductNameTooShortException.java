@@ -1,4 +1,4 @@
 package com.kozos.progtechbeadando.Products.Exceptions;
 
-public class ProductNameTooShortException extends Throwable {
+public class ProductNameTooShortException extends RuntimeException {
 }

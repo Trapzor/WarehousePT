@@ -1,22 +1,22 @@
 package com.kozos.progtechbeadando.Products;
 
+import com.kozos.progtechbeadando.Products.Exceptions.ProductDesiredQuantityIsTooHighException;
+import com.kozos.progtechbeadando.Products.Exceptions.ProductDesiredQuantityIsTooLowException;
 import com.kozos.progtechbeadando.Products.Exceptions.ProductIdCannotBeEmptyException;
 import com.kozos.progtechbeadando.Products.Exceptions.ProductNameCannotBeEmptyException;
 import com.kozos.progtechbeadando.Products.Exceptions.ProductNameTooLongException;
 import com.kozos.progtechbeadando.Products.Exceptions.ProductNameTooShortException;
 import com.kozos.progtechbeadando.Products.Exceptions.ProductPriceIsTooLowException;
-import com.kozos.progtechbeadando.Products.Exceptions.ProductDesiredQuantityIsTooHighException;
-import com.kozos.progtechbeadando.Products.Exceptions.ProductDesiredQuantityIsTooLowException;
 import com.kozos.progtechbeadando.Warranty.Warranty;
 
 public abstract class ProductImpl implements Product{
 
-    public ProductImpl(String id, String name, Warranty warranty, int price, int quantity) {
-        this.id = id;
-        this.name = name;
-        this.warranty = warranty;
-        this.price = price;
-        this.quantity = quantity;
+    public ProductImpl(String id, String name, Warranty warranty, int price, int quantity) throws ProductIdCannotBeEmptyException {
+        setId(id);
+        setName(name);
+        setWarranty(warranty);
+        setPrice(price);
+        changeQuantity(quantity);
     }
 
     String id;
@@ -31,7 +31,7 @@ public abstract class ProductImpl implements Product{
     }
 
     void setId(String id) throws ProductIdCannotBeEmptyException {
-        if(id == null || id == " ")
+        if(id == null || id.equals(" ") || id.equals(""))
             throw new ProductIdCannotBeEmptyException();
         this.id = id;
     }
@@ -43,7 +43,7 @@ public abstract class ProductImpl implements Product{
 
     @Override
     public void setName(String name) throws ProductNameCannotBeEmptyException, ProductNameTooShortException, ProductNameTooLongException {
-        if(name == null || name.equals(" "))
+        if(name == null || name.equals(" ") || name.equals(""))
             throw new ProductNameCannotBeEmptyException();
         if(name.length() < 3)
             throw new ProductNameTooShortException();
@@ -81,6 +81,10 @@ public abstract class ProductImpl implements Product{
     @Override
     public Warranty getWarranty() {
         return warranty;
+    }
+
+    void setWarranty(Warranty warranty){
+        this.warranty = warranty;
     }
 
     @Override
