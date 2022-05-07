@@ -1,8 +1,13 @@
 package com.kozos.progtechbeadando.Products;
 
+import com.kozos.progtechbeadando.Products.Exceptions.IdCannotBeEmptyException;
+import com.kozos.progtechbeadando.Products.Exceptions.NameCannotBeEmptyException;
+import com.kozos.progtechbeadando.Products.Exceptions.NameTooLongException;
+import com.kozos.progtechbeadando.Products.Exceptions.NameTooShortException;
+import com.kozos.progtechbeadando.Products.Exceptions.PriceIsTooLowException;
 import com.kozos.progtechbeadando.Warranty.Warranty;
 
-public class ProductImpl implements Product{
+public abstract class ProductImpl implements Product{
 
     public ProductImpl(String id, String name, Warranty warranty, int price, int quantity) {
         this.id = id;
@@ -19,8 +24,14 @@ public class ProductImpl implements Product{
     int quantity;
 
     @Override
-    public String getId() {
+    public String getId(){
         return this.id;
+    }
+
+    void setId(String id) throws IdCannotBeEmptyException {
+        if(id == null || id == " ")
+            throw new IdCannotBeEmptyException();
+        this.id = id;
     }
 
     @Override
@@ -29,7 +40,13 @@ public class ProductImpl implements Product{
     }
 
     @Override
-    public void setName(String name) {
+    public void setName(String name) throws NameCannotBeEmptyException, NameTooShortException, NameTooLongException {
+        if(name == null ||name == " ")
+            throw new NameCannotBeEmptyException();
+        if(name.length() < 3)
+            throw new NameTooShortException();
+        if(name.length() > 50)
+            throw new NameTooLongException();
         this.name = name;
     }
 
@@ -39,7 +56,9 @@ public class ProductImpl implements Product{
     }
 
     @Override
-    public void setPrice(int price) {
+    public void setPrice(int price) throws PriceIsTooLowException {
+        if(price < 0)
+            throw new PriceIsTooLowException();
         this.price = price;
     }
 
