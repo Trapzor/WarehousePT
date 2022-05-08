@@ -17,12 +17,19 @@ public class MyWarehouse implements Warehouse{
 
     public static MyWarehouse getInstance(){
         if(instance == null)
-            instance = new MyWarehouse();
+            createInstance();
         return instance;
+    }
+
+    private static void createInstance() {
+        instance = new MyWarehouse();
+
+        //TODO get data from database to products list
     }
 
     @Override
     public void addProduct(Product product) {
+        //TODO add object to database and add to list in case of success
         products.add(product);
     }
 
