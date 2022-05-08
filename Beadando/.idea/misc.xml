@@ -4,7 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/EKE/Progtech/Beadando/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/EKE/Progtech/GitBead/WarehousePT/Beadando/app/src/main/res/layout/activity_create_new_order.xml" value="0.36666666666666664" />
+        <entry key="..\:/EKE/Progtech/GitBead/WarehousePT/Beadando/app/src/main/res/layout/activity_customers.xml" value="0.36666666666666664" />
         <entry key="..\:/EKE/Progtech/GitBead/WarehousePT/Beadando/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/EKE/Progtech/GitBead/WarehousePT/Beadando/app/src/main/res/layout/activity_orders.xml" value="0.25" />
+        <entry key="..\:/EKE/Progtech/GitBead/WarehousePT/Beadando/app/src/main/res/layout/activity_products.xml" value="0.32105628908964556" />
+        <entry key="..\:/EKE/Progtech/GitBead/WarehousePT/Beadando/app/src/main/res/layout/activity_warranty_check.xml" value="0.36666666666666664" />
         <entry key="..\:/EKE/Progtech/GitBead/WarehousePT/Beadando/app/src/main/res/layout/fragment_customers.xml" value="0.36666666666666664" />
         <entry key="..\:/EKE/Progtech/GitBead/WarehousePT/Beadando/app/src/main/res/layout/fragment_orders.xml" value="0.36666666666666664" />
         <entry key="..\:/EKE/Progtech/GitBead/WarehousePT/Beadando/app/src/main/res/layout/fragment_products.xml" value="0.36666666666666664" />

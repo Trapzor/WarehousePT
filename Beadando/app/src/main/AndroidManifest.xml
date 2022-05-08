@@ -10,6 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Progtechbeadando">
         <activity
+            android:name=".AndroidEssentials.CreateNewOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AndroidEssentials.WarrantyCheckActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AndroidEssentials.OrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AndroidEssentials.ProductsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AndroidEssentials.CustomersActivity"
+            android:exported="false" />
+        <activity
             android:name=".AndroidEssentials.MainActivity"
             android:exported="true">
             <intent-filter>
