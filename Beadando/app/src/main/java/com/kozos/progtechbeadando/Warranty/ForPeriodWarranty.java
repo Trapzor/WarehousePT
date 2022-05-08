@@ -4,6 +4,10 @@ import java.util.Date;
 
 public class ForPeriodWarranty implements Warranty{
 
+    public ForPeriodWarranty(Date expirationDate) {
+        setExpirationDate(expirationDate);
+    }
+
     Date expirationDate;
     Date getExpirationDate(){
         return this.expirationDate;
