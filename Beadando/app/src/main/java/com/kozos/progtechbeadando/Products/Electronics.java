@@ -1,6 +1,5 @@
 package com.kozos.progtechbeadando.Products;
 
-import com.kozos.progtechbeadando.Products.Exceptions.ProductIdCannotBeEmptyException;
 import com.kozos.progtechbeadando.Warranty.Warranty;
 
 public class Electronics extends ProductImpl{

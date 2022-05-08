@@ -17,20 +17,20 @@ import org.junit.Test;
 public class ProductImplTest {
 
     @Test
-    public void getId() throws ProductIdCannotBeEmptyException {
+    public void ProductGetId() throws ProductIdCannotBeEmptyException {
         Product testProduct = new Electronics("testId", "testName", new NoWarranty(), 1200, 10);
         Assert.assertEquals("testId", testProduct.getId());
     }
 
     @Test
-    public void setId() {
+    public void ProductIdCannotBeEmptyException() {
         Exception exception = Assert.assertThrows(ProductIdCannotBeEmptyException.class, () -> {
             Product testProduct = new Electronics("", "testName", new NoWarranty(), 1200, 10);
         });
     }
 
     @Test
-    public void getName() {
+    public void ProductGetName() {
         Product testProduct = new Electronics("testId", "testName", new NoWarranty(), 1200, 10);
         Assert.assertEquals("testName", testProduct.getName());
     }

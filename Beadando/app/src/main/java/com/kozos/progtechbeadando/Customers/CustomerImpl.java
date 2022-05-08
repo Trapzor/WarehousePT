@@ -5,16 +5,16 @@ import com.kozos.progtechbeadando.Customers.Exceptions.CustomerAddressTooLongExc
 import com.kozos.progtechbeadando.Customers.Exceptions.CustomerAddressTooShortException;
 import com.kozos.progtechbeadando.Customers.Exceptions.CustomerIdCannotBeEmptyException;
 import com.kozos.progtechbeadando.Customers.Exceptions.CustomerNameCannotBeEmptyException;
-import com.kozos.progtechbeadando.Customers.Exceptions.CustomerNameFormatNotAcceptabbleException;
+import com.kozos.progtechbeadando.Customers.Exceptions.CustomerNameFormatNotAcceptableException;
 import com.kozos.progtechbeadando.Customers.Exceptions.CustomerNameTooLongException;
 import com.kozos.progtechbeadando.Customers.Exceptions.CustomerNameTooShortException;
 
-public class CustomerImpl implements Customer{
+public abstract class CustomerImpl implements Customer{
 
     public CustomerImpl(String id, String name, String address) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
+        setId(id);
+        setName(name);
+        setAddress(address);
     }
 
     String id;
@@ -26,7 +26,7 @@ public class CustomerImpl implements Customer{
         return id;
     }
     void setId(String id) throws CustomerIdCannotBeEmptyException {
-        if(id == null || id.equals(" "))
+        if(id == null || id.equals(" ") ||id.equals(""))
             throw new CustomerIdCannotBeEmptyException();
         this.id = id;
     }
@@ -36,12 +36,12 @@ public class CustomerImpl implements Customer{
         return name;
     }
     @Override
-    public void setName(String name) throws CustomerNameCannotBeEmptyException, CustomerNameFormatNotAcceptabbleException, CustomerNameTooShortException, CustomerNameTooLongException {
-        if(name == null || name.equals(" "))
+    public void setName(String name) throws CustomerNameCannotBeEmptyException, CustomerNameFormatNotAcceptableException, CustomerNameTooShortException, CustomerNameTooLongException {
+        if(name == null || name.equals(" ") || name.equals(""))
             throw new CustomerNameCannotBeEmptyException();
         if(!name.contains(" "))
-            throw new CustomerNameFormatNotAcceptabbleException();
-        if(name.length() < 3)
+            throw new CustomerNameFormatNotAcceptableException();
+        if(name.length() < 4)
             throw new CustomerNameTooShortException();
         if(name.length() > 50)
             throw  new CustomerNameTooLongException();
@@ -54,7 +54,7 @@ public class CustomerImpl implements Customer{
     }
     @Override
     public void setAddress(String address) throws CustomerAddressCannotBeEmptyException, CustomerAddressTooShortException, CustomerAddressTooLongException {
-        if(address == null || address.equals(" "))
+        if(address == null || address.equals(" ") || address.equals(""))
             throw new CustomerAddressCannotBeEmptyException();
         if(address.length() < 13)
             throw new CustomerAddressTooShortException();
