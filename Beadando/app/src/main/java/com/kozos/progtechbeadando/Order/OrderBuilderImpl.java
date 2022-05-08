@@ -10,15 +10,8 @@ public abstract class OrderBuilderImpl implements OrderBuilder{
     List<Product> products;
     Customer customer;
 
-
-    public void setBuilder(OrderBuilder orderBuilder){
-        //to-do
-    }
-
     @Override
-    public Order getOrder() {
-        return null;//flag
-    }
+    public abstract Order getOrder();
 
     @Override
     public void addProduct(Product product) {

@@ -8,7 +8,8 @@ import java.util.List;
 public interface Order {
 
     String getId();
-    String setId();
+    void setId(String id);
+
     List<Product> getProducts();
     Customer getCustomer();
 

@@ -9,14 +9,22 @@ public abstract class OrderImpl implements Order{
     OrderBuilder builder;
     String id;
 
+    public OrderImpl(String id) {
+        this.setId(id);
+    }
+
+    public OrderImpl(OrderBuilder builder, String id) {
+        this.builder = builder;
+        this.setId(id);
+    }
+
     @Override
     public String getId() {
         return this.id;
     }
-
     @Override
-    public String setId() {
-        return null;//flag
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
@@ -27,5 +35,10 @@ public abstract class OrderImpl implements Order{
     @Override
     public Customer getCustomer() {
         return this.builder.getCustomer();
+    }
+
+    public void setBuilder(OrderBuilder orderBuilder)
+    {
+        //TO-DO
     }
 }
