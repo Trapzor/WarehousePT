@@ -1,8 +1,10 @@
-package com.kozos.progtechbeadando;
+package com.kozos.progtechbeadando.AndroidEssentials;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.kozos.progtechbeadando.R;
 
 public class MainActivity extends AppCompatActivity {
 

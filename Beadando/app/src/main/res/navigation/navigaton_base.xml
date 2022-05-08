@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigaton_base"
+    app:startDestination="@id/productsFragment">
+
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="com.kozos.progtechbeadando.AndroidEssentials.ProductsFragment"
+        android:label="fragment_products"
+        tools:layout="@layout/fragment_products" >
+        <action
+            android:id="@+id/action_productsFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment" />
+        <action
+            android:id="@+id/action_productsFragment_to_customersFragment"
+            app:destination="@id/customersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customersFragment"
+        android:name="com.kozos.progtechbeadando.AndroidEssentials.CustomersFragment"
+        android:label="fragment_customers"
+        tools:layout="@layout/fragment_customers" >
+        <action
+            android:id="@+id/action_customersFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment" />
+        <action
+            android:id="@+id/action_customersFragment_to_productsFragment"
+            app:destination="@id/productsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.kozos.progtechbeadando.AndroidEssentials.OrdersFragment"
+        android:label="fragment_orders"
+        tools:layout="@layout/fragment_orders" >
+        <action
+            android:id="@+id/action_ordersFragment_to_customersFragment"
+            app:destination="@id/customersFragment" />
+        <action
+            android:id="@+id/action_ordersFragment_to_productsFragment"
+            app:destination="@id/productsFragment" />
+    </fragment>
+</navigation>
