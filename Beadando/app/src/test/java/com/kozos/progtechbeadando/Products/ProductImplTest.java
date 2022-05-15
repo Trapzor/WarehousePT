@@ -69,6 +69,20 @@ public class ProductImplTest {
     }
 
     @Test
+    public void ProductSetQuantity(){
+        Product testProduct = new Electronics("testId", "testName", new NoWarranty(), 1200, 10);
+        Assert.assertEquals(10, testProduct.getQuantity());
+    }
+
+    @Test
+    public void ProductAddQuantity(){
+        Product testProduct = new Electronics("testId", "testName", new NoWarranty(), 1200, 5);
+        testProduct.changeQuantity(5);
+        Assert.assertEquals(10, testProduct.getQuantity());
+
+    }
+
+    @Test
     public void ProductChangeQuantityLow(){
         Exception exception = Assert.assertThrows(ProductDesiredQuantityIsTooLowException.class, () ->{
             Product testProduct = new Electronics("testId", "testName", new NoWarranty(), 1200, -5);

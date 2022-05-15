@@ -16,6 +16,7 @@ public abstract class ProductImpl implements Product{
         setName(name);
         setWarranty(warranty);
         setPrice(price);
+        this.quantity = 0;
         changeQuantity(quantity);
     }
 
@@ -75,7 +76,7 @@ public abstract class ProductImpl implements Product{
             throw new ProductDesiredQuantityIsTooLowException();
         if(quantity > 300000)
             throw new ProductDesiredQuantityIsTooHighException();
-        this.quantity = quantity;
+        this.quantity += quantity;
     }
 
     @Override
@@ -89,6 +90,6 @@ public abstract class ProductImpl implements Product{
 
     @Override
     public void applyWarranty(){
-
+        warranty.apply();
     }
 }
