@@ -1,24 +1,24 @@
 package com.kozos.progtechbeadando.AndroidEssentials.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.kozos.progtechbeadando.Customers.Customer;
+import com.kozos.progtechbeadando.Products.Product;
 import com.kozos.progtechbeadando.R;
 
 import java.util.ArrayList;
 
-public class CustomersAdapter extends BaseAdapter {
+public class ProductsAdapter extends BaseAdapter {
 
-    ArrayList<Customer> data;
+    ArrayList<Product> data;
     Context context;
 
-    public CustomersAdapter(ArrayList<Customer> data, Context context) {
+    public ProductsAdapter(ArrayList<Product> data, Context context) {
         this.data = data;
         this.context = context;
     }
@@ -38,18 +38,21 @@ public class CustomersAdapter extends BaseAdapter {
         return i;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        if(view == null) {
+        if(view == null){
             LayoutInflater inflater = (LayoutInflater)
                     context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.customer_list_item, viewGroup, false);
+            view = inflater.inflate(R.layout.product_list_item, viewGroup, false);
         }
-        TextView customerName = view.findViewById(R.id.customerNameAdapter);
-        TextView customerAddress = view.findViewById(R.id.customerAddressAdapter);
+        TextView productName = view.findViewById(R.id.productNameAdapter);
+        TextView productPrice = view.findViewById(R.id.productPriceAdapter);
+        TextView productQuantity = view.findViewById(R.id.productQuantityAdapter);
 
-        customerName.setText(data.get(i).getName());
-        customerAddress.setText(data.get(i).getAddress());
+        productName.setText(data.get(i).getName());
+        productPrice.setText(data.get(i).getPrice() + " Ft");
+        productQuantity.setText(data.get(i).getQuantity() + " DB");
 
         return view;
     }

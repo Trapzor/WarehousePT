@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ListView;
 
 import com.kozos.progtechbeadando.AndroidEssentials.Adapters.CustomersAdapter;
 import com.kozos.progtechbeadando.Customers.Customer;
@@ -22,32 +23,26 @@ import java.util.List;
 public class CustomersActivity extends AppCompatActivity {
 
     Button toOrders, toProducts, addCustomer;
-    EditText customerId, customerName, customerAddress;
-    GridView customerGridView;
+    EditText customerName, customerAddress;
+    ListView customerListView;
 
-    ArrayList<Customer> customers = (ArrayList<Customer>) MyWarehouse.getInstance().getCustomers();
-    ArrayAdapter<String> customerNames, customerAddresses;
+    ArrayList<Customer> customers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customers);
 
-        for(Customer c : customers){
-            customerNames.add(c.getName());
-            customerAddresses.add(c.getAddress());
-        }
+        customers = (ArrayList<Customer>) MyWarehouse.getInstance().getCustomers();
+        CustomersAdapter customersAdapter = new CustomersAdapter(customers, this);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                R.layout.customer_list_item, (List<String>) customerNames);
-
-        CustomersAdapter customersAdapter = new CustomersAdapter();
+        customerListView = findViewById(R.id.customerListView);
+        customerListView.setAdapter(customersAdapter);
 
         toOrders = findViewById(R.id.customerToOrdersButton);
         toProducts = findViewById(R.id.customerToProductsButton);
         addCustomer = findViewById(R.id.customerAddCustomerButton);
 
-        customerId = findViewById(R.id.customerIdText);
         customerName = findViewById(R.id.customerNameText);
         customerAddress = findViewById(R.id.customerAddressText);
 
@@ -71,12 +66,9 @@ public class CustomersActivity extends AppCompatActivity {
         addCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Customer customer = new SimpleCustomer(
-                        customerId.toString(),
-                        customerName.toString(),
-                        customerAddress.toString());
-
-                //TODO add to db
+                MyWarehouse.getInstance().addNewCustomer(
+                        customerName.getText().toString(),
+                        customerAddress.getText().toString());
             }
         });
 

@@ -9,13 +9,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.kozos.progtechbeadando.AndroidEssentials.Adapters.ProductsAdapter;
 import com.kozos.progtechbeadando.Order.Order;
 import com.kozos.progtechbeadando.Products.Electronics;
 import com.kozos.progtechbeadando.Products.Product;
 import com.kozos.progtechbeadando.Products.Toys;
 import com.kozos.progtechbeadando.R;
+import com.kozos.progtechbeadando.Warehouse.MyWarehouse;
 import com.kozos.progtechbeadando.Warranty.ForPeriodWarranty;
 import com.kozos.progtechbeadando.Warranty.LifetimeWarranty;
 import com.kozos.progtechbeadando.Warranty.NoWarranty;
@@ -23,6 +26,7 @@ import com.kozos.progtechbeadando.Warranty.Warranty;
 
 import java.text.DateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -32,11 +36,24 @@ public class ProductsActivity extends AppCompatActivity {
     CheckBox noWarranty, lifetimeWarranty, warrantyForPeriod;
     Button toOrders, toCustomers, addProduct;
     EditText productId, productName, productPrice, productQuantity;
+    ListView productListView;
+
+    ArrayList<Product> products;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
+
+        products = (ArrayList<Product>) MyWarehouse.getInstance().getProducts();
+        ProductsAdapter productsAdapter = new ProductsAdapter(products, this);
+
+        for(int i = 0; i < 30; i++){
+            products.add(new Electronics(i + "aaa", i+"sajbolvanahold", new NoWarranty(), i, i));
+        }
+
+        productListView = findViewById(R.id.productListView);
+        productListView.setAdapter(productsAdapter);
 
         toOrders = findViewById(R.id.productToOrdersButton);
         toCustomers = findViewById(R.id.productToCustomersButton);
@@ -143,22 +160,20 @@ public class ProductsActivity extends AppCompatActivity {
                 }
 
                 if(typeOfProduct.toString().equals("Electronics")){
-                    Product product = new Electronics(
-                            productId.toString(),
-                            productName.toString(),
+                    MyWarehouse.getInstance().addElectronicsProduct(
+                            productName.getText().toString(),
                             warranty,
-                            Integer.parseInt(productPrice.toString()),
-                            Integer.parseInt((productQuantity.toString())));
-                    //TODO add to db.
+                            Integer.parseInt(productPrice.getText().toString()),
+                            Integer.parseInt(productQuantity.getText().toString())
+                    );
                 }
                 else if(typeOfProduct.toString().equals("Toys")){
-                    Product product = new Toys(
-                        productId.toString(),
-                        productName.toString(),
-                        warranty,
-                        Integer.parseInt(productPrice.toString()),
-                        Integer.parseInt((productQuantity.toString())));
-                    //TODO add to db.
+                    MyWarehouse.getInstance().addToysProduct(
+                            productName.getText().toString(),
+                            warranty,
+                            Integer.parseInt(productPrice.getText().toString()),
+                            Integer.parseInt(productQuantity.getText().toString())
+                    );
                 }
 
             }

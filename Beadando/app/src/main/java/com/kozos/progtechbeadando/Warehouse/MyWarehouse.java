@@ -1,15 +1,19 @@
 package com.kozos.progtechbeadando.Warehouse;
 
 import com.kozos.progtechbeadando.Customers.Customer;
+import com.kozos.progtechbeadando.Customers.SimpleCustomer;
 import com.kozos.progtechbeadando.Order.Order;
 import com.kozos.progtechbeadando.Order.OrderBuilder;
 import com.kozos.progtechbeadando.Order.SimpleOrder;
+import com.kozos.progtechbeadando.Products.Electronics;
 import com.kozos.progtechbeadando.Products.Product;
+import com.kozos.progtechbeadando.Products.Toys;
 import com.kozos.progtechbeadando.Warehouse.Exceptions.WarehouseAlreadyHasCustomerException;
 import com.kozos.progtechbeadando.Warehouse.Exceptions.WarehouseAlreadyHasOrderException;
 import com.kozos.progtechbeadando.Warehouse.Exceptions.WarehouseNotContainsCustomerException;
 import com.kozos.progtechbeadando.Warehouse.Exceptions.WarehouseNotContainsOrderException;
 import com.kozos.progtechbeadando.Warehouse.Exceptions.WarehouseNotContainsProductException;
+import com.kozos.progtechbeadando.Warranty.Warranty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +59,33 @@ public class MyWarehouse implements Warehouse{
             products.add(product);
     }
 
+    public void addElectronicsProduct(String name, Warranty warranty, int price, int quantity){
+        addProduct(new Electronics(generateNewProductId(), name, warranty, price, quantity));
+    }
+
+    public void addToysProduct(String name, Warranty warranty, int price, int quantity){
+        addProduct(new Toys(generateNewProductId(), name, warranty, price, quantity));
+    }
+
+    public String generateNewProductId(){
+        if(products.size() == 0){
+            return "P-0001";
+        }
+        else{
+            StringBuilder sb = new StringBuilder();
+
+            String id = (products.get(products.size() - 1).getId());
+
+            sb.append(id.substring(0, id.length() - 4));
+
+            id = id.substring(id.length() - 4);
+            int nextId = Integer.parseInt(id) + 1;
+            sb.append(nextId);
+
+            return sb.toString();
+        }
+    }
+
     @Override
     public Product getProduct(String id) {
         for(Product p : products)
@@ -83,11 +114,11 @@ public class MyWarehouse implements Warehouse{
 
     @Override
     public void addNewOrder(OrderBuilder orderBuilder){
-        String id = generateNewId();
+        String id = generateNewOrderId();
         orders.add(new SimpleOrder(orderBuilder, id));
     }
 
-    public String generateNewId(){
+    public String generateNewOrderId(){
         if(orders.size() == 0){
             return "O-0001";
         }
@@ -129,6 +160,29 @@ public class MyWarehouse implements Warehouse{
             }
         }
         customers.add(customer);
+    }
+
+    public void addNewCustomer(String name, String address){
+        addNewCustomer(new SimpleCustomer(generateNewCustomerId(), name, address));
+    }
+
+    public String generateNewCustomerId(){
+        if(customers.size() == 0){
+            return "C-0001";
+        }
+        else{
+            StringBuilder sb = new StringBuilder();
+
+            String id = (customers.get(customers.size() - 1).getId());
+
+            sb.append(id.substring(0, id.length() - 4));
+
+            id = id.substring(id.length() - 4);
+            int nextId = Integer.parseInt(id) + 1;
+            sb.append(nextId);
+
+            return sb.toString();
+        }
     }
 
     @Override
