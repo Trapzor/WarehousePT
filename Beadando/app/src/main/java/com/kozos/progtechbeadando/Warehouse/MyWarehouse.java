@@ -64,7 +64,7 @@ public class MyWarehouse implements Warehouse{
     }
 
     public void addToysProduct(String name, Warranty warranty, int price, int quantity){
-        addProduct(new Toys(generateNewProductId(), name, warranty, price, quantity));
+            addProduct(new Toys(generateNewProductId(), name, warranty, price, quantity));
     }
 
     public String generateNewProductId(){

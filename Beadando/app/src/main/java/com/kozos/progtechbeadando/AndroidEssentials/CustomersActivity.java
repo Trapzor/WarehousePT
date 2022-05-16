@@ -10,9 +10,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.kozos.progtechbeadando.AndroidEssentials.Adapters.CustomersAdapter;
 import com.kozos.progtechbeadando.Customers.Customer;
+import com.kozos.progtechbeadando.Customers.Exceptions.CustomerAddressCannotBeEmptyException;
+import com.kozos.progtechbeadando.Customers.Exceptions.CustomerAddressTooLongException;
+import com.kozos.progtechbeadando.Customers.Exceptions.CustomerAddressTooShortException;
+import com.kozos.progtechbeadando.Customers.Exceptions.CustomerNameCannotBeEmptyException;
+import com.kozos.progtechbeadando.Customers.Exceptions.CustomerNameFormatNotAcceptableException;
+import com.kozos.progtechbeadando.Customers.Exceptions.CustomerNameTooLongException;
+import com.kozos.progtechbeadando.Customers.Exceptions.CustomerNameTooShortException;
 import com.kozos.progtechbeadando.Customers.SimpleCustomer;
 import com.kozos.progtechbeadando.R;
 import com.kozos.progtechbeadando.Warehouse.MyWarehouse;
@@ -22,9 +30,20 @@ import java.util.List;
 
 public class CustomersActivity extends AppCompatActivity {
 
+    String CUSTOMER_ADDRESS_EMPTY = "Customer address cannot be empty!";
+    String CUSTOMER_ADDRESS_LONG = "Customer address is too long!";
+    String CUSTOMER_ADDRESS_SHORT = "Customer address is too short!";
+    String CUSTOMER_NAME_FORMAT = "Customer name format not acceptable!";
+    String CUSTOMER_NAME_EMPTY = "Customer name cannot be empty!";
+    String CUSTOMER_NAME_LONG = "Customer name is too long!";
+    String CUSTOMER_NAME_SHORT = "Customer name is too short!";
+    String CUSTOMER_ADD_SUCCESSFUL = "Customer added successfully!";
+
     Button toOrders, toProducts, addCustomer;
     EditText customerName, customerAddress;
     ListView customerListView;
+
+    Toast toast;
 
     ArrayList<Customer> customers;
 
@@ -66,9 +85,27 @@ public class CustomersActivity extends AppCompatActivity {
         addCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyWarehouse.getInstance().addNewCustomer(
-                        customerName.getText().toString(),
-                        customerAddress.getText().toString());
+                try {
+                    MyWarehouse.getInstance().addNewCustomer(
+                            customerName.getText().toString(),
+                            customerAddress.getText().toString());
+                    toast = Toast.makeText(CustomersActivity.this, CUSTOMER_ADD_SUCCESSFUL, Toast.LENGTH_LONG );
+                }catch (CustomerAddressCannotBeEmptyException e){
+                    toast = Toast.makeText(CustomersActivity.this, CUSTOMER_ADDRESS_EMPTY, Toast.LENGTH_LONG);
+                }catch (CustomerAddressTooLongException e){
+                    toast = Toast.makeText(CustomersActivity.this, CUSTOMER_ADDRESS_LONG , Toast.LENGTH_LONG);
+                }catch (CustomerAddressTooShortException e){
+                    toast = Toast.makeText(CustomersActivity.this, CUSTOMER_ADDRESS_SHORT, Toast.LENGTH_LONG);
+                }catch (CustomerNameCannotBeEmptyException e){
+                    toast = Toast.makeText(CustomersActivity.this, CUSTOMER_NAME_EMPTY , Toast.LENGTH_LONG);
+                }catch (CustomerNameTooLongException e){
+                    toast = Toast.makeText(CustomersActivity.this, CUSTOMER_NAME_LONG , Toast.LENGTH_LONG);
+                }catch (CustomerNameTooShortException e){
+                    toast = Toast.makeText(CustomersActivity.this, CUSTOMER_NAME_SHORT , Toast.LENGTH_LONG);
+                }catch (CustomerNameFormatNotAcceptableException e){
+                    toast = Toast.makeText(CustomersActivity.this, CUSTOMER_NAME_FORMAT, Toast.LENGTH_LONG);
+                }
+                toast.show();
             }
         });
 

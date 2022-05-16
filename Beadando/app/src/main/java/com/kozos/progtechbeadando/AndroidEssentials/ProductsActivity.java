@@ -11,32 +11,43 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.kozos.progtechbeadando.AndroidEssentials.Adapters.ProductsAdapter;
-import com.kozos.progtechbeadando.Order.Order;
 import com.kozos.progtechbeadando.Products.Electronics;
+import com.kozos.progtechbeadando.Products.Exceptions.ProductDesiredQuantityIsTooHighException;
+import com.kozos.progtechbeadando.Products.Exceptions.ProductDesiredQuantityIsTooLowException;
+import com.kozos.progtechbeadando.Products.Exceptions.ProductNameCannotBeEmptyException;
+import com.kozos.progtechbeadando.Products.Exceptions.ProductNameTooLongException;
+import com.kozos.progtechbeadando.Products.Exceptions.ProductNameTooShortException;
+import com.kozos.progtechbeadando.Products.Exceptions.ProductPriceIsTooLowException;
 import com.kozos.progtechbeadando.Products.Product;
-import com.kozos.progtechbeadando.Products.Toys;
 import com.kozos.progtechbeadando.R;
 import com.kozos.progtechbeadando.Warehouse.MyWarehouse;
 import com.kozos.progtechbeadando.Warranty.ForPeriodWarranty;
 import com.kozos.progtechbeadando.Warranty.LifetimeWarranty;
 import com.kozos.progtechbeadando.Warranty.NoWarranty;
 import com.kozos.progtechbeadando.Warranty.Warranty;
-
-import java.text.DateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class ProductsActivity extends AppCompatActivity {
+
+    String PRODUCT_NAME_EMPTY = "Product name cannot be empty!";
+    String PRODUCT_NAME_SHORT = "Product name too short!";
+    String PRODUCT_NAME_LONG = "Product name too long!";
+    String PRODUCT_PRICE_LOW = "Product price too low";
+    String PRODUCT_QUANTITY_LOW ="Desired quantity is too low!";
+    String PRODUCT_QUANTITY_HIGH = "Desired quantity is too high!";
+    String PRODUCT_ADD_SUCCESSFUL = "Product successfully added!";
 
     Spinner typeOfProduct;
     CheckBox noWarranty, lifetimeWarranty, warrantyForPeriod;
     Button toOrders, toCustomers, addProduct;
     EditText productId, productName, productPrice, productQuantity;
     ListView productListView;
+
+    Toast toast;
 
     ArrayList<Product> products;
 
@@ -116,35 +127,22 @@ public class ProductsActivity extends AppCompatActivity {
             }
         });
 
-        productId.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                productId.setText("");
-            }
-        });
-        productName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                productName.setText("");
-            }
-        });
-        productPrice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                productPrice.setText("");
-            }
-        });
-        productQuantity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                productQuantity.setText("");
-            }
-        });
-
-
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(productPrice.getText().toString().equals(null)  || productPrice.getText().toString().equals("") || productPrice.getText().toString().equals(" ")){
+                    toast = Toast.makeText(ProductsActivity.this,"Product price cannot be empty!", Toast.LENGTH_LONG);
+                    toast.show();
+                    return;
+                }
+
+                if(productQuantity.getText().toString().equals(null) || productQuantity.getText().toString().equals("") || productQuantity.getText().toString().equals(" ")){
+                    toast = Toast.makeText(ProductsActivity.this,"Product quantity cannot be empty!", Toast.LENGTH_LONG);
+                    toast.show();
+                    return;
+                }
+
                 if(!noWarranty.isChecked() && !lifetimeWarranty.isChecked() && !warrantyForPeriod.isChecked())
                     noWarranty.setChecked(true);
 
@@ -159,23 +157,53 @@ public class ProductsActivity extends AppCompatActivity {
                     warranty = new ForPeriodWarranty(new Date());
                 }
 
-                if(typeOfProduct.toString().equals("Electronics")){
+                if(typeOfProduct.getSelectedItem().toString().equals("Electronics")){
+                    try{
                     MyWarehouse.getInstance().addElectronicsProduct(
                             productName.getText().toString(),
                             warranty,
                             Integer.parseInt(productPrice.getText().toString()),
-                            Integer.parseInt(productQuantity.getText().toString())
-                    );
+                            Integer.parseInt(productQuantity.getText().toString()));
+                    toast = Toast.makeText(ProductsActivity.this, PRODUCT_ADD_SUCCESSFUL, Toast.LENGTH_LONG);
+                    }catch (ProductNameCannotBeEmptyException e) {
+                        toast = Toast.makeText(ProductsActivity.this, PRODUCT_NAME_EMPTY, Toast.LENGTH_LONG);
+                    }catch (ProductNameTooLongException e) {
+                        toast = Toast.makeText(ProductsActivity.this, PRODUCT_NAME_LONG, Toast.LENGTH_LONG);
+                    }catch (ProductNameTooShortException e) {
+                        toast = Toast.makeText(ProductsActivity.this, PRODUCT_NAME_SHORT, Toast.LENGTH_LONG);
+                    }catch (ProductPriceIsTooLowException e){
+                        toast = Toast.makeText(ProductsActivity.this, PRODUCT_PRICE_LOW,Toast.LENGTH_LONG);
+                    }catch (ProductDesiredQuantityIsTooHighException e){
+                        toast = Toast.makeText(ProductsActivity.this, PRODUCT_QUANTITY_HIGH, Toast.LENGTH_LONG);
+                    }catch (ProductDesiredQuantityIsTooLowException e){
+                        toast = Toast.makeText(ProductsActivity.this, PRODUCT_QUANTITY_LOW, Toast.LENGTH_LONG);
+                    }
+                    toast.show();
+
                 }
                 else if(typeOfProduct.toString().equals("Toys")){
+                    try{
                     MyWarehouse.getInstance().addToysProduct(
                             productName.getText().toString(),
                             warranty,
                             Integer.parseInt(productPrice.getText().toString()),
-                            Integer.parseInt(productQuantity.getText().toString())
-                    );
+                            Integer.parseInt(productQuantity.getText().toString()));
+                    toast = Toast.makeText(ProductsActivity.this, PRODUCT_ADD_SUCCESSFUL, Toast.LENGTH_LONG);
+                    }catch (ProductNameCannotBeEmptyException e) {
+                        toast = Toast.makeText(ProductsActivity.this, PRODUCT_NAME_EMPTY, Toast.LENGTH_LONG);
+                    }catch (ProductNameTooLongException e) {
+                        toast = Toast.makeText(ProductsActivity.this, PRODUCT_NAME_LONG, Toast.LENGTH_LONG);
+                    }catch (ProductNameTooShortException e) {
+                        toast = Toast.makeText(ProductsActivity.this, PRODUCT_NAME_SHORT, Toast.LENGTH_LONG);
+                    }catch (ProductPriceIsTooLowException e){
+                        toast = Toast.makeText(ProductsActivity.this, PRODUCT_PRICE_LOW,Toast.LENGTH_LONG);
+                    }catch (ProductDesiredQuantityIsTooHighException e){
+                        toast = Toast.makeText(ProductsActivity.this, PRODUCT_QUANTITY_HIGH, Toast.LENGTH_LONG);
+                    }catch (ProductDesiredQuantityIsTooLowException e){
+                        toast = Toast.makeText(ProductsActivity.this, PRODUCT_QUANTITY_LOW, Toast.LENGTH_LONG);
+                    }
+                    toast.show();
                 }
-
             }
         });
     }
