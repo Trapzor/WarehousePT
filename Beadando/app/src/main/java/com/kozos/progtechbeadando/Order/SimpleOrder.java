@@ -1,9 +1,13 @@
 package com.kozos.progtechbeadando.Order;
 
-public class SimpleOrder extends OrderImpl{
-    public SimpleOrder(OrderBuilder builder, String id)
-    {
-        super(builder, id);
+import com.kozos.progtechbeadando.Customers.Customer;
+import com.kozos.progtechbeadando.Products.Product;
 
+import java.util.List;
+
+public class SimpleOrder extends OrderImpl{
+
+    public SimpleOrder(String id, Customer customer, List<Product> products) {
+        super(id, customer, products);
     }
 }

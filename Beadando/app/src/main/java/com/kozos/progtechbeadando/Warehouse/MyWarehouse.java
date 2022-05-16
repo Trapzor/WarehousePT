@@ -109,13 +109,12 @@ public class MyWarehouse implements Warehouse{
             }
         }
         orders.add(order);
-
     }
 
     @Override
     public void addNewOrder(OrderBuilder orderBuilder){
         String id = generateNewOrderId();
-        orders.add(new SimpleOrder(orderBuilder, id));
+        orders.add(orderBuilder.getOrder(id));
     }
 
     public String generateNewOrderId(){
