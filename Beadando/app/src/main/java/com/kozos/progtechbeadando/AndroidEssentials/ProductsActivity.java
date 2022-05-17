@@ -14,7 +14,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.kozos.progtechbeadando.AndroidEssentials.Adapters.ProductsAdapter;
-import com.kozos.progtechbeadando.Products.Electronics;
 import com.kozos.progtechbeadando.Products.Exceptions.ProductDesiredQuantityIsTooHighException;
 import com.kozos.progtechbeadando.Products.Exceptions.ProductDesiredQuantityIsTooLowException;
 import com.kozos.progtechbeadando.Products.Exceptions.ProductNameCannotBeEmptyException;
@@ -46,7 +45,6 @@ public class ProductsActivity extends AppCompatActivity {
     Button toOrders, toCustomers, addProduct;
     EditText productId, productName, productPrice, productQuantity;
     ListView productListView;
-
     Toast toast;
 
     ArrayList<Product> products;
@@ -56,12 +54,11 @@ public class ProductsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
-        products = (ArrayList<Product>) MyWarehouse.getInstance().getProducts();
-        ProductsAdapter productsAdapter = new ProductsAdapter(products, this);
-
-        for(int i = 0; i < 30; i++){
-            products.add(new Electronics(i + "aaa", i+"sajbolvanahold", new NoWarranty(), i, i));
+        for(int i = 1; i <= 30; i++){
+            MyWarehouse.getInstance().addElectronicsProduct(i +" Product", new NoWarranty(), i, i);
         }
+        //products = (ArrayList<Product>) MyWarehouse.getInstance().getProducts();
+        ProductsAdapter productsAdapter = new ProductsAdapter((ArrayList<Product>) MyWarehouse.getInstance().getProducts(), this);
 
         productListView = findViewById(R.id.productListView);
         productListView.setAdapter(productsAdapter);

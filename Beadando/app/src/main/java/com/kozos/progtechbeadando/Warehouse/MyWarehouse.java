@@ -60,7 +60,7 @@ public class MyWarehouse implements Warehouse{
     }
 
     public void addElectronicsProduct(String name, Warranty warranty, int price, int quantity){
-        addProduct(new Electronics(generateNewProductId(), name, warranty, price, quantity));
+            addProduct(new Electronics(generateNewProductId(), name, warranty, price, quantity));
     }
 
     public void addToysProduct(String name, Warranty warranty, int price, int quantity){
@@ -80,7 +80,7 @@ public class MyWarehouse implements Warehouse{
 
             id = id.substring(id.length() - 4);
             int nextId = Integer.parseInt(id) + 1;
-            sb.append(nextId);
+            sb.append(String.format("%04d", nextId));
 
             return sb.toString();
         }
@@ -130,7 +130,7 @@ public class MyWarehouse implements Warehouse{
 
             id = id.substring(id.length() - 4);
             int nextId = Integer.parseInt(id) + 1;
-            sb.append(nextId);
+            sb.append(String.format("%04d", nextId));
 
             return sb.toString();
         }
@@ -178,7 +178,7 @@ public class MyWarehouse implements Warehouse{
 
             id = id.substring(id.length() - 4);
             int nextId = Integer.parseInt(id) + 1;
-            sb.append(nextId);
+            sb.append(String.format("%04d", nextId));
 
             return sb.toString();
         }

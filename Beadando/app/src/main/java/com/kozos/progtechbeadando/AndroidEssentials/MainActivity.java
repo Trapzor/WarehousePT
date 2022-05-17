@@ -1,10 +1,8 @@
 package com.kozos.progtechbeadando.AndroidEssentials;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.service.autofill.OnClickAction;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.kozos.progtechbeadando.Database.ChangeLogOpenHelper;
 import com.kozos.progtechbeadando.Database.CustomersOpenHelper;
 import com.kozos.progtechbeadando.Database.OrdersOpenHelper;
-import com.kozos.progtechbeadando.Database.ProductsContract;
 import com.kozos.progtechbeadando.Database.ProductsOpenHelper;
 import com.kozos.progtechbeadando.R;
 
@@ -74,8 +71,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(switchToWarrantyCheckIntent);
             }
         });
-
     }
-
-
 }

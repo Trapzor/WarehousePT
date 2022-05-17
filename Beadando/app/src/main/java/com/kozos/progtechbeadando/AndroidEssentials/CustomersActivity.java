@@ -45,15 +45,16 @@ public class CustomersActivity extends AppCompatActivity {
 
     Toast toast;
 
-    ArrayList<Customer> customers;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customers);
 
-        customers = (ArrayList<Customer>) MyWarehouse.getInstance().getCustomers();
-        CustomersAdapter customersAdapter = new CustomersAdapter(customers, this);
+        for(int i = 1; i <= 30; i++){
+            MyWarehouse.getInstance().addNewCustomer(i + " Person", "Address Address Address " + i);
+        }
+
+        CustomersAdapter customersAdapter = new CustomersAdapter((ArrayList<Customer>) MyWarehouse.getInstance().getCustomers(), this);
 
         customerListView = findViewById(R.id.customerListView);
         customerListView.setAdapter(customersAdapter);
