@@ -1,10 +1,11 @@
 package com.kozos.progtechbeadando.Warehouse;
 
+import android.util.Log;
+
 import com.kozos.progtechbeadando.Customers.Customer;
 import com.kozos.progtechbeadando.Customers.SimpleCustomer;
 import com.kozos.progtechbeadando.Order.Order;
 import com.kozos.progtechbeadando.Order.OrderBuilder;
-import com.kozos.progtechbeadando.Order.SimpleOrder;
 import com.kozos.progtechbeadando.Products.Electronics;
 import com.kozos.progtechbeadando.Products.Product;
 import com.kozos.progtechbeadando.Products.Toys;
@@ -55,8 +56,10 @@ public class MyWarehouse implements Warehouse{
                 break;
             }
         }
-        if(!exist)
+        if(!exist){
             products.add(product);
+            Log.i("PRODUCTS LOG", "Product added!");
+        }
     }
 
     public void addElectronicsProduct(String name, Warranty warranty, int price, int quantity){
@@ -109,12 +112,14 @@ public class MyWarehouse implements Warehouse{
             }
         }
         orders.add(order);
+        Log.i("ORDERS LOG","Order added!");
     }
 
     @Override
     public void addNewOrder(OrderBuilder orderBuilder){
         String id = generateNewOrderId();
         orders.add(orderBuilder.getOrder(id));
+        Log.i("ORDER LOG", "Order added!");
     }
 
     public String generateNewOrderId(){
@@ -159,6 +164,7 @@ public class MyWarehouse implements Warehouse{
             }
         }
         customers.add(customer);
+        Log.i("CUSTOMERS LOG", "Customer added!");
     }
 
     public void addNewCustomer(String name, String address){
