@@ -20,7 +20,7 @@ public class OrdersActivity extends AppCompatActivity {
 
         toProducts = findViewById(R.id.orderToProductsButton);
         toCustomers = findViewById(R.id.orderToCustomersButton);
-        toCreateOrder = findViewById(R.id.orderToCreatNewOrderButton);
+        //toCreateOrder = findViewById(R.id.orderToCreatNewOrderButton);
 
         Intent switchToProductsIntent = new Intent(this, ProductsActivity.class);
         Intent switchToCustomersIntent = new Intent(this, CustomersActivity.class);
@@ -40,11 +40,11 @@ public class OrdersActivity extends AppCompatActivity {
             }
         });
 
-        toCreateOrder.setOnClickListener(new View.OnClickListener() {
+        /*toCreateOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(switchToCreateNewOrderIntent);
             }
-        });
+        });*/
     }
 }

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         toProducts = findViewById(R.id.mainToProductsButton);
         toOrders = findViewById(R.id.mainToOrdersButton);
         toCustomers = findViewById(R.id.mainToCustomersButton);
-        toWarrantyCheck = findViewById(R.id.mainToWarrantyCheckButton);
+        //toWarrantyCheck = findViewById(R.id.mainToWarrantyCheckButton);
 
         Intent switchToProductsIntent = new Intent(this, ProductsActivity.class);
         Intent switchToCustomersIntent = new Intent(this, CustomersActivity.class);
@@ -65,11 +65,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        toWarrantyCheck.setOnClickListener(new View.OnClickListener() {
+        /*toWarrantyCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(switchToWarrantyCheckIntent);
             }
-        });
+        });*/
     }
 }

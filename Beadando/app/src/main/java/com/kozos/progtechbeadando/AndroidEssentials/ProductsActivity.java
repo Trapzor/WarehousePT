@@ -176,7 +176,6 @@ public class ProductsActivity extends AppCompatActivity {
                         toast = Toast.makeText(ProductsActivity.this, PRODUCT_QUANTITY_LOW, Toast.LENGTH_LONG);
                     }
                     toast.show();
-
                 }
                 else if(typeOfProduct.toString().equals("Toys")){
                     try{
